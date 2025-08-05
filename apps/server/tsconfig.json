@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+
+  "compilerOptions": {
+    "resolvePackageJsonExports": true,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+
+		"types": ["node", "jest"],
+
+		"paths": {
+			"@libs/types/*": ["../../libs/types/src/*"],
+			"@libs/shared/*": ["../../libs/shared/src/*"],
+			"@apps/client/*": ["./src/*"]
+		}
+  }
+}

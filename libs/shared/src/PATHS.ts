@@ -1,7 +1,3 @@
-export const clientPaths = {
+export const clientPaths = {} as const;
 
-} as const
-
-export const serverPaths = {
-
-} as const
+export const serverPaths = {} as const;
