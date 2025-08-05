@@ -46,6 +46,13 @@
 
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
+
+		// ПОБОЧНЫЕ ЭФФЕКТЫ
+		"noUncheckedSideEffectImports": true,
+		// НЕ ИСПОЛЬЗУЕМЫЕ ПАРАМЕТРЫ В ФУНКЦИЯХ
+		"noUnusedParameters": true,
+		// https://eslint.org/docs/latest/extend/ways-to-extend
+		"erasableSyntaxOnly": true
 	},
 	"exclude": ["node_modules", "dist", ".jest-cache"],
 }
