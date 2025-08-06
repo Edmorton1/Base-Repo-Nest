@@ -57,7 +57,10 @@
 		"zod": "^4.0.14"
 	},
 	"lint-staged": {
-		"**/*.{js,html,css,ts,tsx,jsx}": "prettier --write",
-		"**/*.{ts}": "eslint"
+		"**/*.{js,mjs,cjs,jsx,ts,tsx}": [
+			"prettier --write",
+			"eslint --fix"
+		],
+		"**/*.{html,css,scss,json}": "prettier --write"
 	}
 }
