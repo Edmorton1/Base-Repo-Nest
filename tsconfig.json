@@ -1,9 +1,5 @@
 {
 	"compilerOptions": {
-    "module": "nodenext",
-    "target": "esnext",
-    "moduleResolution": "nodenext",
-
 		"allowJs": false,
 		"checkJs": false,
 		"jsx": "react-jsx",
@@ -52,7 +48,14 @@
 		// НЕ ИСПОЛЬЗУЕМЫЕ ПАРАМЕТРЫ В ФУНКЦИЯХ
 		"noUnusedParameters": true,
 		// https://eslint.org/docs/latest/extend/ways-to-extend
-		"erasableSyntaxOnly": true
+		// "erasableSyntaxOnly": true
+
+		// "paths": {
+		// 	"@libs/types/*": ["./libs/types/src/*"],
+		// 	"@libs/shared/*": ["./libs/shared/src/*"],
+		// 	"@apps/server/*": ["./apps/server/src/*"],
+		// 	"@apps/client/*": ["./apps/client/src/*"]
+		// }
 	},
-	"exclude": ["node_modules", "dist", ".jest-cache"],
+	"exclude": ["node_modules", "dist", ".jest-cache"]
 }
