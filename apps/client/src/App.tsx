@@ -11,7 +11,9 @@ function App() {
 	console.log(_URL_SERVER);
 
 	useEffect(() => {
-		fetch(_URL_SERVER + "/users");
+		void fetch(_URL_SERVER + "/users")
+			.then(data => data.json())
+			.then(data => console.log(data));
 	}, []);
 
 	return (

@@ -24,6 +24,6 @@ void (async () => {
 		process.env["HOST"],
 		process.env["PORT"],
 	);
-	await app.listen(port, host);
-	// console.log("SUPER SERVER", server.address());
+	const server = await app.listen(port, host);
+	console.log("SUPER SERVER", server.address());
 })();
