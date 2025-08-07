@@ -18,6 +18,7 @@
 		"skipLibCheck": true,
 
 		"strict": true,
+		// "strictPropertyInitialization": false,
 		// РУГАЕТСЯ ЕСЛИ ПЕРЕМЕННАЯ НЕ ИСПОЛЬЗУЕТСЯ
 		"noUnusedLocals": true,
 
@@ -46,7 +47,7 @@
 		// ПОБОЧНЫЕ ЭФФЕКТЫ
 		"noUncheckedSideEffectImports": true,
 		// НЕ ИСПОЛЬЗУЕМЫЕ ПАРАМЕТРЫ В ФУНКЦИЯХ
-		"noUnusedParameters": true,
+		"noUnusedParameters": true
 		// https://eslint.org/docs/latest/extend/ways-to-extend
 		// "erasableSyntaxOnly": true
 

@@ -3,9 +3,16 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { PREFIX } from "@libs/shared/CONST";
 import Count from "@apps/client/testing/react-testing/Count";
+import { useEffect } from "react";
 
 function App() {
 	console.log(PREFIX);
+	console.log(import.meta.env["VITE_MY_ENV"]);
+	console.log(_URL_SERVER);
+
+	useEffect(() => {
+		fetch(_URL_SERVER + "/users");
+	}, []);
 
 	return (
 		<>

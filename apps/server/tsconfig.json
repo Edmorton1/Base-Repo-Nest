@@ -13,12 +13,15 @@
 		"baseUrl": "./",
 		"incremental": true,
 
+		// #Listing
+		"strictPropertyInitialization": false,
+
 		"types": ["node", "jest"],
 
 		"paths": {
 			"@libs/types/*": ["../../libs/types/src/*"],
 			"@libs/shared/*": ["../../libs/shared/src/*"],
-			"@apps/server/*": ["./src/*"],
+			"@apps/server/*": ["./src/*"]
 		}
 	}
 }
