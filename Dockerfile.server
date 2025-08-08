@@ -1,54 +1,56 @@
 # Build Stage
 FROM node:20-alpine AS builder
 
+# Pnpm install
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 WORKDIR /app
 
 COPY package*.json ./
-COPY package-lock.json ./
+COPY pnpm-workspace.yaml ./
 
-COPY packages/backend ./packages/backend
-COPY packages/shared ./packages/shared
-COPY packages/types ./packages/types
+COPY libs/shared ./libs/shared
+COPY libs/types ./libs/types
+COPY apps/server ./apps/server
 
-ENV NODE_ENV=development
-
-RUN npm install
+RUN pnpm install
 
 COPY . .
 
-ENV NODE_ENV=production
-
-ENV HOST=localhost:3000
-ENV PROTOCOL=http
-
-RUN npm run build:back
+RUN npm run build:s
 
 # Production Stage
 FROM node:20-alpine AS production
 
+# Pnpm install
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 WORKDIR /app
 
 COPY package*.json ./
-COPY packages/backend/package*.json ./packages/backend/
-COPY packages/shared/package*.json ./packages/shared/
-COPY packages/types/package*.json ./packages/types/
-COPY packages/backend ./packages/backend/check-env.js
-COPY ./certs ./certs
-COPY packages/backend/.env ./packages/backend/.env
+COPY pnpm-workspace.yaml ./
+COPY apps/server/package*.json ./apps/server/
+COPY libs/shared/package*.json ./libs/shared/
+COPY libs/types/package*.json ./libs/types/
 
-ENV NODE_ENV=production
+# COPY packages/backend/.env ./packages/backend/.env
 
-RUN npm install --omit=dev
+ENV PORT=80
+ENV HOST=0.0.0.0
 
-COPY --from=builder /app/packages/backend/dist ./packages/backend/dist
+RUN pnpm install --prod
+
+COPY --from=builder /app/apps/server/dist ./apps/server/dist
 
 EXPOSE 80
 
-CMD ["npm", "run", "start:back"]
+CMD ["pnpm", "run", "start:s"]
 
-# docker build -t znakomstva-back -f Dockerfile.back .
-# docker run --name znakomstva-back -p 3000:80 znakomstva-back
-# node packages/backend/dist/packages/backend/src/index.js
-# docker run -it --rm -p 3000:80 -v D:/путь/к/certs:/certs znakomstva-back sh
-
-# NODE_ENV=production - ТОЛЬКО С НИМ ВСЁ ЗАПУСКАТЬ
+# docker build -t rhythm-game_server -f Dockerfile.server .
+# docker run --name rhythm-game_server -p 3000:80 rhythm-game_server
+# docker run -it --rm -p 3000:80 rhythm-game_server sh
+# apk add --no-cache curl

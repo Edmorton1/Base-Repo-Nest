@@ -8,7 +8,7 @@
 		"watch:s": "npm run watch --workspace=@apps/server",
 		"dev:s": "npm run start:dev --workspace=@apps/server",
 		"build:s": "npm run build --workspace=@apps/server",
-		"start:s": "npm run preview --workspace=@apps/server",
+		"start:s": "npm run start:prod --workspace=@apps/server",
 		"test:s": "npm run test --workspace=@apps/server",
 		"test:watch:s": "npm run test:watch --workspace=@apps/server",
 		"test:cov:s": "npm run test:cov --workspace=@apps/server",
@@ -25,7 +25,7 @@
 		"test:cov:c": "npm run test:cov --workspace=@apps/client",
 		"test:e2e:c": "npm run test:e2e --workspace=@apps/client",
 		"test:shared": "npm run test --workspace=@libs/shared",
-		"prepare": "husky install"
+		"prepare": "husky install || true"
 	},
 	"workspaces": [
 		"apps/*",
