@@ -1,6 +1,6 @@
 name: GitHub Actions Push
 
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: '${{ github.actor }} [TESTS] Server & Client testing'
 
 on:
   push:
@@ -10,6 +10,13 @@ on:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    env:
+      HOST: 0.0.0.0
+      PORT: 3000
+      VITE_PROTOCOL: http
+      VITE_HOST: localhost
+      VITE_PORT: 5000
+      VITE_PORT_SERVER: 3000
 
     strategy:
       matrix:
