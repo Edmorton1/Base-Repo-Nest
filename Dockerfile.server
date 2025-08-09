@@ -1,21 +1,15 @@
 # Build Stage
 FROM node:20-alpine AS builder
 
-# Pnpm install
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 WORKDIR /app
 
 COPY package*.json ./
-COPY pnpm-workspace.yaml ./
 
 COPY libs/shared ./libs/shared
 COPY libs/types ./libs/types
 COPY apps/server ./apps/server
 
-RUN pnpm install
+RUN yarn install
 
 COPY . .
 
@@ -24,15 +18,9 @@ RUN npm run build:s
 # Production Stage
 FROM node:20-alpine AS production
 
-# Pnpm install
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
 WORKDIR /app
 
 COPY package*.json ./
-COPY pnpm-workspace.yaml ./
 COPY apps/server/package*.json ./apps/server/
 COPY libs/shared/package*.json ./libs/shared/
 COPY libs/types/package*.json ./libs/types/
@@ -42,13 +30,13 @@ COPY libs/types/package*.json ./libs/types/
 ENV PORT=80
 ENV HOST=0.0.0.0
 
-RUN pnpm install --prod
+RUN yarn install --production
 
 COPY --from=builder /app/apps/server/dist ./apps/server/dist
 
 EXPOSE 80
 
-CMD ["pnpm", "run", "start:s"]
+CMD ["yarn", "run", "start:s"]
 
 # docker build -t rhythm-game_server -f Dockerfile.server .
 # docker run --name rhythm-game_server -p 3000:80 rhythm-game_server

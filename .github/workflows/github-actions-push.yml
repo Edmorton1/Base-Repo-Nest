@@ -1,4 +1,4 @@
-name: GitHub Actions Push
+name: Client & Server tests
 
 run-name: '${{ github.actor }} [TESTS] Server & Client testing'
 
@@ -8,8 +8,10 @@ on:
     branches: [ "master" ]
 
 jobs:
-  Explore-GitHub-Actions:
+  build:
+
     runs-on: ubuntu-latest
+    
     env:
       HOST: 0.0.0.0
       PORT: 3000
@@ -24,38 +26,38 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - name: Install yarn
+        run: npm install -g yarn  
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: "yarn"
 
       - name: install dependencies
-        run: pnpm install
+        run: yarn install
 
       - name: shared test
-        run: pnpm run test:shared
+        run: yarn run test:shared
 
       - name: build server
-        run: pnpm run build:s
+        run: yarn run build:s
 
       - name: unit server
-        run: pnpm run test:s
+        run: yarn run test:s
 
       - name: e2e server
-        run: pnpm run test:e2e:s
+        run: yarn run test:e2e:s
 
       - name: build client
-        run: pnpm run build:c
+        run: yarn run build:c
 
       - name: unit client
-        run: pnpm run test:c
+        run: yarn run test:c
 
       - name: react client
-        run: pnpm run test:react
+        run: yarn run test:react
 
       # - name: e2e client
-      #   run: pnpm run test:e2e:c
+      #   run: yarn run test:e2e:c

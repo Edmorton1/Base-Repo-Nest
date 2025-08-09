@@ -1,7 +1,8 @@
 {
 	"name": "app",
 	"version": "1.0.0",
-	"packageManager": "pnpm@10.14.0",
+	"packageManager": "yarn@1.22.22",
+	"private": "true",
 	"scripts": {
 		"lint": "npx eslint . --fix",
 		"watch": "tsc --noEmit --watch",
@@ -16,7 +17,7 @@
 		"watch:c": "npm run watch --workspace=@apps/client",
 		"dev:c": "npm run dev --workspace=@apps/client",
 		"build:c": "npm run build --workspace=@apps/client",
-		"start:c": "npm run preview --workspace=@apps/client",
+		"start:c": "npm run start --workspace=@apps/client",
 		"test:c": "npm run test --workspace=@apps/client",
 		"test:react": "npm run test:react --workspace=@apps/client",
 		"test:react:watch": "npm run test:react:watch --workspace=@apps/client",
